@@ -1,10 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { endsWith, isNodeModuleFile, GeneratorPlugin } = require("./webpack.utils");
+const { endsWith, some, isNodeModuleFile, GeneratorPlugin } = require("./webpack.utils");
 
 const webpackConfig = (env) => {
     const publicPath = env && env.publicPath ? env.publicPath : "/";
-    const appEnv = Object.assign({}, defaultAppEnv, env);
     const production = env && env.production ? true : false;
     const buildVersion = env && env.buildVersion ? env.buildVersion : production ? "Unknown" : "DEV";
 
@@ -13,7 +12,7 @@ const webpackConfig = (env) => {
         publicPath: publicPath,
         buildVersion: buildVersion,
         buildDate: new Date().toString(),
-        env: appEnv
+        env: env
     };
 
     const config = {

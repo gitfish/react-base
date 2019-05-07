@@ -1,3 +1,27 @@
+const RawSource = require("webpack-sources").RawSource;
+
+class GeneratorPlugin {
+    constructor(options) {
+        this._generator = options.generator;
+        this._filename = options.filename;
+    }
+
+    apply(compiler) {
+        const generator = this._generator;
+        const filename = this._filename;
+        compiler.plugin("emit", (compilation, callback) => {
+            const generatorOptions = {
+                compilation: compilation,
+                webpack: compilation.getStats().toJson(),
+                webpackConfig: compilation.options,
+                filename: this._filename
+            };
+            compilation.assets[filename] = new RawSource(generator(generatorOptions));
+            callback();
+        });
+    }
+}
+
 const contains = (...values) => {
     return filename => {
         return values.some(value => {
@@ -27,31 +51,6 @@ const endsWith = (...extensions) => {
 };
 
 const isNodeModuleFile = contains("node_modules");
-
-class GeneratorPlugin {
-    _generator;
-    _filename;
-
-    constructor(options) {
-        this._generator = options.generator;
-        this._filename = options.filename;
-    }
-
-    apply(compiler) {
-        const generator = this._generator;
-        const filename = this._filename;
-        compiler.plugin("emit", function(compilation, callback) {
-            const generatorOptions = {
-                compilation: compilation,
-                webpack: compilation.getStats().toJson(),
-                webpackConfig: compilation.options,
-                filename: this._filename
-            };
-            compilation.assets[filename] = new RawSource(generator(generatorOptions));
-            callback();
-        });
-    }
-}
 
 module.exports = {
     contains,
