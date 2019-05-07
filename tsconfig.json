@@ -13,6 +13,9 @@
         "paths": {
             "package.json": ["../package.json"]
         },
-        "lib": ["dom", "es5", "scripthost", "esnext"] 
+        "lib": ["dom", "es5", "scripthost", "esnext"],
+        "types": [
+            "jest"
+        ]
     }
 }
