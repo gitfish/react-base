@@ -4,10 +4,11 @@
   "description": "React base project",
   "main": "index.js",
   "scripts": {
-    "clean": "del-cli dist --force",
+    "clean": "del-cli dist --force && del-cli dist-test --force",
     "build": "webpack",
     "build-watch": "webpack --progress --watch",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "test": "jest"
   },
   "author": "",
   "license": "MIT",
@@ -27,6 +28,7 @@
     "jest": "^24.8.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.0",
     "typescript": "^3.4.5",
     "webpack": "^4.30.0",

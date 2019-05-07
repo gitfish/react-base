@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist-test",
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "baseUrl": "./src",
+        "lib": ["dom", "es5", "scripthost", "esnext"] 
+    }
+}
